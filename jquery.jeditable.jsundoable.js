@@ -11,12 +11,19 @@ $.extend(jQuery,new UndoManager({
 $.extend($.editable.types.text,{
   plugin:function (settings,self) {
     var form = this;
-    undo.undoable('undo change',function () {
+    undo.undoable('undo change',function() {
+      var functionArray = new Array();
       form.find('input').each(function () {
-        var $this = $(this);
-        $this.val($this.val());
+        var originalText = $(this).val();
+        functionArray.push(function() {
+          $(self).text(originalText);
+        });
       });
-      form.submit();
-    });
+      return function () {
+        for (var i in functionArray) {
+          functionArray[i].apply(form);
+        }
+      }
+    }());
   }
 });
