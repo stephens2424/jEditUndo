@@ -10,11 +10,11 @@ $.extend(jQuery,new UndoManager({
 }));
 $.extend($.editable.types.text,{
   plugin:function (settings,self) {
-    console.log("plugin applied");
     var form = this;
     undo.undoable('undo change',function () {
       form.find('input').each(function () {
-        this.val(this.val());
+        var $this = $(this);
+        $this.val($this.val());
       });
       form.submit();
     });
