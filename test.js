@@ -13,4 +13,7 @@ $(document).ready(function () {
     form.submit();
     });
   }});
+  $('#undoButton').click(function () {
+    undo.undo();
+  });
 });
