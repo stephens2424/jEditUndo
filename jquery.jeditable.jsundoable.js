@@ -24,3 +24,7 @@ $.extend($.editable.types.text,{
     }());
   }
 });
+//extend textarea type with the same plugin for text
+$.extend($.editable.types.textarea,{
+  plugin:$.editable.types.text.plugin
+});
