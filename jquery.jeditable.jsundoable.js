@@ -1,12 +1,12 @@
-$.extend(jQuery,new UndoManager({
+jQuery.undoManager = new UndoManager({
   undoChange:function() {
     console.log("Undo stack changed.");
   }
-}));
+});
 $.extend($.editable.types.text,{
   plugin:function (settings,self) {
     var form = this;
-    undo.undoable('undo change',function() {
+    $.undoManager.undoable('undo change',function() {
       var functionArray = new Array();
       form.find('input').each(function () {
         var originalText = $(this).val();

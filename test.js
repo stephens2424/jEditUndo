@@ -4,6 +4,6 @@ $(document).ready(function () {
     return value;
   });
   $('#undoButton').click(function () {
-    undo.undo();
+    $.undoManager.undo();
   });
 });
