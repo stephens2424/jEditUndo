@@ -4,15 +4,8 @@ $(document).ready(function () {
     console.log("Test div is '" + value + "'.");
     return value;
   },{
-  "plugin":function (settings,self) {
-    var form = this;
-    undo.undoable('undo change',function () {
-      form.find('input').each(function () {
-        this.val(this.val());
-      });
-    form.submit();
-    });
-  }});
+  plugin:jsundoableplugin
+  });
   $('#undoButton').click(function () {
     undo.undo();
   });
