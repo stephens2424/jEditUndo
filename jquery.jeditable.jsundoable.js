@@ -1,11 +1,6 @@
-var undo = new UndoManager({
-    undoChange:function () {
-      console.log("Undo registered");
-    }
-  });
 $.extend(jQuery,new UndoManager({
   undoChange:function() {
-    console.log("Undo registered.");
+    console.log("Undo stack changed.");
   }
 }));
 $.extend($.editable.types.text,{
