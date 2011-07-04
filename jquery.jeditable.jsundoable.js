@@ -1,8 +1,10 @@
+//add undo manager object to jQuery namespace
 jQuery.undoManager = new UndoManager({
   undoChange:function() {
     console.log("Undo stack changed.");
   }
 });
+//extend textbox type of jeditable to handle undo
 $.extend($.editable.types.text,{
   plugin:function (settings,self) {
     var form = this;
