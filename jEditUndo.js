@@ -1,3 +1,11 @@
+/*! Copyright (c) 2010 Stephen Searles (http://stephensearles.com)
+ * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
+ * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+ *
+ * Version: 1.0
+ * Docs: http://stephensearles.com/Site/jEditUndo.html
+ */
+
 //add undo manager object to jQuery namespace
 jQuery.undoManager = new UndoManager({
   undoChange:function() {
