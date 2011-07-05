@@ -27,9 +27,12 @@ $.extend($.editable.types.text,{
     var functionArray = new Array();
     $form.find('input').each(function (i,input) {
       var originalText = $(input).val();
+      var newText;
       functionArray.push(function() {
+        newText = $element.text();
         $element.text(originalText);
         $(input).val(originalText);
+        originalText = newText;
       });
     });
     $.editable.types.text.undoFunction = function (submitFunction,form,settings) {
