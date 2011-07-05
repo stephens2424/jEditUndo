@@ -15,7 +15,7 @@ jQuery.fn.editable.defaults.onsubmit = function(settings,element) {
       }
     });
   });
-  $.undoManager.undoable('undo name',function() {
+  $.undoManager.undoable('undo changing value to ' + $(this).find('input').val(),function() {
     return $.editable.types.text.undoFunction;
   }(),[submitFunction,form,settings]);
 }
