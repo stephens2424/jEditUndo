@@ -17,7 +17,7 @@ jQuery.fn.editable.defaults.onsubmit = function(settings,element) {
   });
   $.undoManager.undoable('undo changing value to ' + $(this).find('input').val(),function() {
     return $.editable.types.text.undoFunction;
-  }(),[submitFunction,form,settings]);
+  }(),[submitFunction,form,settings],element);
 }
 //extend textbox type of jeditable to handle undo
 $.extend($.editable.types.text,{
@@ -36,14 +36,15 @@ $.extend($.editable.types.text,{
       });
     });
     $.editable.types.text.undoFunction = function (submitFunction,form,settings) {
+      $.editable.types.text.plugin.apply(form, [settings, this]);
       for (var i in functionArray) {
-        functionArray[i].apply($form);
+        functionArray[i].apply(form);
       }
-      $form.find('input').prop('type','hidden');
-      $form.submit(submitFunction);
-      $('body').append($form);
-      $form.triggerHandler('submit');
-      $form.remove();
+      form.find('input').prop('type','hidden');
+      form.submit(submitFunction);
+      $('body').append(form);
+      form.triggerHandler('submit');
+      form.remove();
       console.log("I passed submit");
     };
   }
