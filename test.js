@@ -6,4 +6,7 @@ $(document).ready(function () {
   $('#undoButton').click(function () {
     $.undoManager.undo();
   });
+  $('#redoButton').click(function() {
+    $.undoManager.redo();
+  });
 });
