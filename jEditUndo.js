@@ -7,11 +7,7 @@
  */
 
 //add undo manager object to jQuery namespace
-jQuery.undoManager = new UndoManager({
-  undoChange:function() {
-    console.log("Undo stack changed.");
-  }
-});
+jQuery.undoManager = new UndoManager();
 //add default callback to jeditable
 jQuery.fn.editable.defaults.onsubmit = function(settings,element) {
   var form = this;
@@ -53,7 +49,6 @@ $.extend($.editable.types.text,{
       $('body').append(form);
       form.triggerHandler('submit');
       form.remove();
-      console.log("I passed submit");
     };
   }
 });
