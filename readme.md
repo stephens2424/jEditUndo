@@ -10,5 +10,5 @@ To use this plugin, simply include the script on your page following the three p
 
 jEditUndo is dual licensed under both MIT and GPL.
 
-http://stephensearles.com/Site/jEditUndo.html
+http://stephensearles.com/jEditUndo/
 
