@@ -1,7 +1,15 @@
 <html>
+<head>
+<title>jEditUndo Test</title>
+<link rel="stylesheet" type="text/css" href="test.css" />
+</head>
 <body>
-<div id="testDiv">Test Div</div>
-<button id="undoButton">Undo</button><button id="redoButton">Redo</button>
+<div id="wrapper">
+<div id="content">
+<p id="testDivWrapper"><div id="testDiv">Test Div</div></p>
+<div id="verticalSpacerDiv"></div>
+<p><button id="undoButton">Undo</button><span id="spacerDiv"></span><button id="redoButton">Redo</button></p>
+</div></div>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="jsundoable.js"></script>
 <script type="text/javascript" src="jquery.jeditable.js"></script>

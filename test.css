@@ -1,0 +1,35 @@
+* {
+font-family: helvetica;
+}
+
+#wrapper {
+text-align: center;
+margin: 100 0 0 0;
+}
+
+#content {
+border-style: solid;
+border-width: 1px;
+border-color: black;
+width: 300px;
+margin: 0 auto 0 auto;
+padding: 10 25 25 25;
+}
+
+#testDiv {
+min-height: 50px;
+}
+
+#spacerDiv {
+margin: 20;
+}
+
+#verticalSpacerDiv {
+margin: 0 0 0 0;
+}
+
+button {
+height: 25px;
+width: 80px;
+font-size: medium;
+}
