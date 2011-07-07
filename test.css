@@ -16,8 +16,9 @@ margin: 0 auto 0 auto;
 padding: 10 25 25 25;
 }
 
-#testDiv {
+.testDiv {
 min-height: 50px;
+margin: 20 0 20 0;
 }
 
 #spacerDiv {
@@ -32,4 +33,8 @@ button {
 height: 25px;
 width: 80px;
 font-size: medium;
+}
+
+input {
+font-size:large;
 }
