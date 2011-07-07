@@ -19,9 +19,16 @@ jQuery.fn.editable.defaults.onsubmit = function(settings,element) {
       }
     });
   });
-  $.undoManager.undoable('undo changing value to ' + $(this).find('input').val(),function() {
-    return $.editable.types.text.undoFunction;
-  }(),[submitFunction,form,settings],element);
+  if ('text' === settings.type) {
+    $.undoManager.undoable('undo changing value to ' + $(this).find('input').val(),function() {
+      return $.editable.types.text.undoFunction;
+    }(),[submitFunction,form,settings],element);
+  }
+  else if ('textarea' === settings.type) {
+    $.undoManager.undoable('undo changing value to ' + $(this).find('textarea').val(),function() {
+      return $.editable.types.textarea.undoFunction;
+    }(),[submitFunction,form,settings],element);
+  }
 }
 //extend textbox type of jeditable to handle undo
 $.extend($.editable.types.text,{
@@ -52,7 +59,32 @@ $.extend($.editable.types.text,{
     };
   }
 });
-//extend textarea type with the same plugin for text
+//extend textarea type with similar plugin as text
 $.extend($.editable.types.textarea,{
-  plugin:$.editable.types.text.plugin
+  plugin:function(settings,self) {
+    var $element = $(self);
+    var $form = this;
+    var functionArray = new Array();
+    $form.find('textarea').each(function (i,textarea) {
+      var originalText = $(textarea).val();
+      var newText;
+      functionArray.push(function() {
+        newText = $element.text();
+        $element.text(originalText);
+        $(textarea).val(originalText);
+        originalText = newText;
+      });
+    });
+    $.editable.types.textarea.undoFunction = function (submitFunction,form,settings) {
+      $.editable.types.textarea.plugin.apply(form, [settings, this]);
+      for (var i in functionArray) {
+        functionArray[i].apply(form);
+      }
+      form.append($('input').prop('type','hidden').val(form.find('textarea').val()));
+      form.submit(submitFunction);
+      $('body').append(form);
+      form.triggerHandler('submit');
+      form.remove();
+    };
+  }
 });
