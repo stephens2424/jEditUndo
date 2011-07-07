@@ -29,6 +29,11 @@ jQuery.fn.editable.defaults.onsubmit = function(settings,element) {
       return $.editable.types.textarea.undoFunction;
     }(),[submitFunction,form,settings],element);
   }
+  else if ('select' === settings.type) {
+    $.undoManager.undoable('undo changing value to ' + $(this).find('option:selected').text(),function() {
+      return $.editable.types.select.undoFunction;
+    }(),[submitFunction,form,settings],element);
+  }
 }
 //extend textbox type of jeditable to handle undo
 $.extend($.editable.types.text,{
@@ -81,6 +86,34 @@ $.extend($.editable.types.textarea,{
         functionArray[i].apply(form);
       }
       form.append($('input').prop('type','hidden').val(form.find('textarea').val()));
+      form.submit(submitFunction);
+      $('body').append(form);
+      form.triggerHandler('submit');
+      form.remove();
+    };
+  }
+});
+//extend select type with similar plugin as text
+$.extend($.editable.types.select,{
+  plugin:function(settings,self) {
+    var $element = $(self);
+    var functionArray = new Array();
+    this.find('select').each(function (i,select) {
+      var originalIndex = $(select).find('option:selected').index();
+      var newIndex;
+      functionArray.push(function() {
+        newIndex = this.find('option:selected').index();
+        this.find('option:selected').prop('selected',false);
+        this.find('option').eq(originalIndex).prop('selected',true);
+        originalIndex = newIndex;
+      });
+    });
+    $.editable.types.select.undoFunction = function (submitFunction,form,settings) {
+      $.editable.types.select.plugin.apply(form, [settings, this]);
+      for (var i in functionArray) {
+        functionArray[i].apply(form);
+      }
+      form.append($('form').prop('type','hidden').val(form.find('option:selected').val()));
       form.submit(submitFunction);
       $('body').append(form);
       form.triggerHandler('submit');
