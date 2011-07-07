@@ -8,6 +8,13 @@ $(document).ready(function () {
   type:"textarea",
   submit:"save"
   });
+  $('#testDiv-select').editable(function (value) {
+    return value;
+  },{
+    type:'select',
+    submit:'save',
+    data:{"opt1":"Editable with select","opt2":"I've been edited with select","opt3":"I've been edited with select again"}
+  });
   $('#undoButton').click(function () {
     $.undoManager.undo();
   });
