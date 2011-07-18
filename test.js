@@ -1,3 +1,9 @@
+$.editable.packageCustomPlugin("text",function (settings,self) {
+  alert("Plugin called!");
+});
+$.editable.packageCustomOnsubmit(function (settings,self) {
+  alert("Onsubmit!");
+});
 $(document).ready(function () {
   $('#testDiv-text').editable(function (value) {
     return value;

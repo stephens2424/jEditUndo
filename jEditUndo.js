@@ -121,3 +121,18 @@ $.extend($.editable.types.select,{
     };
   }
 });
+
+$.editable.packageCustomPlugin = function (type,customFunction) {
+  var undoablePlugin = $.editable.types[type].plugin;
+  $.editable.types[type].plugin = function (settings,self) {
+    undoablePlugin.apply(this,[settings,self]);
+    return customFunction.apply(this,[settings,self]);
+  }
+}
+$.editable.packageCustomOnsubmit = function (customFunction) {
+  var undoableOnsubmit = jQuery.fn.editable.defaults.onsubmit;
+  jQuery.fn.editable.defaults.onsubmit = function(settings,self) {
+    undoableOnsubmit.apply(this,[settings,self]);
+    return customFunction.apply(this,[settings,self]);
+  }
+}
