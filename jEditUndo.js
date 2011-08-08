@@ -3,7 +3,7 @@
  * and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
  *
  * Version: 1.2
- * Docs: http://stephensearles.com/Site/jEditUndo.html
+ * Docs: http://stephensearles.com/jEditUndo.html
  */
 
 //add undo manager object to jQuery namespace
